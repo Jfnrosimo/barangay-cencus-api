@@ -1,12 +1,10 @@
-const { MONGO_URI, PORT } = require("./config/keys");
-
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-const port = PORT || 8000;
+const port = 8000;
 
 //Server setup
 const server = express();
@@ -26,7 +24,7 @@ server.use("/api/v1/occupants", OccupantRouter);
 server.use("/user", AuthenticationRouter);
 
 mongoose
-  .connect(MONGO_URI)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     server.listen(port, () => {
       console.log(`This server is connected to db and running at port`, port);
