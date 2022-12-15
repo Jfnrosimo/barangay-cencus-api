@@ -1,6 +1,4 @@
 const jwt = require("jsonwebtoken");
-const SECRET = require("../config/keys");
-
 //Import model
 const User = require("../models/User");
 
@@ -15,7 +13,7 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(" ")[1];
 
   try {
-    const { _id } = jwt.verify(token, SECRET);
+    const { _id } = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = await User.findOne({ _id }).select("_id");
     next();

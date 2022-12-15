@@ -34,15 +34,6 @@ mongoose
     console.log(error);
   });
 
-//Deployment setup
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  server.get("/", (request, response) => {
-    server.use(express.static(path.resolve(__dirname, "client", "build")));
-    response.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
-
 server.get("/", (request, response) => {
   response.send("Welcome to Web based barangay census server");
 });
